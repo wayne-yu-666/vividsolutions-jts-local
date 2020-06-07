@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.vividsolutions</groupId>
+    <artifactId>jts</artifactId>
+    <version>1.13.001</version>
+    <packaging>jar</packaging>
+
+    <name>JTS Topology Suite</name>
+    <url>https://www.vividsolutions.com/projects/technology.jts</url>
+    <description>The JTS Topology Suite is an API for 2D linear geometry predicates and functions.</description>
+
+    <!--
+    Build JTS Topology Suite and install in local repository:
+       mvn install
+    Build everything and skip tests:
+       mvn clean install -DskipTests
+    Setup for eclipse development:
+       mvn eclipse:eclipse
+       
+    To build with jts-ora:
+       mvn install -Poracle
+    To build with jts-sde:
+       mvn install -Parcsde
+       
+    To build the release (for Maven Central; committers only)
+       mvn install -Drelease
+    -->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit-version>3.7</junit-version>
+        <jdom-version>2.0.6</jdom-version>
+        <jump.version>1.2</jump.version>
+        <json-simple-version>1.1.1</json-simple-version>
+        <sde-version>9.1</sde-version>
+    </properties>
+
+    <!-- PROJECT INFORMATION -->
+    <!-- PROJECT INFORMATION -->
+    <licenses>
+        <license>
+            <name>Eclipse Publish License, Version 1.0</name>
+            <url>https://github.com/locationtech/jts/blob/master/LICENSE_EPLv1.txt</url>
+        </license>
+        <license>
+            <name>Eclipse Distribution License - v 1.0</name>
+            <url>https://github.com/locationtech/jts/blob/master/LICENSE_EDLv1.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Martin Davis</name>
+            <email>mbdavis@VividSolutions.com</email>
+            <organization>Vivid Solutions Inc.</organization>
+            <organizationUrl>http://www.vividsolutions.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Martin Davis</name>
+            <email>mtnclimb@gmail.com</email>
+            <organization>Individual</organization>
+            <organizationUrl>http://tsusiatsoftware.net</organizationUrl>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+            </dependency> 
+            <dependency>
+                <groupId>org.jdom</groupId>
+                <artifactId>jdom2</artifactId>
+                <version>${jdom-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.json-simple</groupId>
+                <artifactId>json-simple</artifactId>
+                <version>${json-simple-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc7</artifactId>
+                <version>11.1.0.7.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Repositories for Dependencies -->
+
+  <build>
+    <plugins>
+      <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.15</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*PerfTest.java</exclude>
+                        <exclude>**/*StressTest.java</exclude>
+                        <exclude>**/jts/perf/**/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>  
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <forceCreation>true</forceCreation>
+        </configuration>
+  
+      </plugin>
+      <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+       
+    </plugins>
+  </build>
+
+
+    <!-- =========================================================== -->
+    <!--     Build Configuration                                     -->
+    <!-- =========================================================== -->
+
+
+    <!-- Modules to build in appropriate dependency order 
+    <modules>
+        <module>modules</module>
+    </modules>
+-->
+</project>
