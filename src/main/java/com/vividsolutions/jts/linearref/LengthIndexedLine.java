@@ -33,6 +33,7 @@
 
 package com.vividsolutions.jts.linearref;
 
+import java.io.Serializable;
 import com.vividsolutions.jts.geom.*;
 
 /**
@@ -45,7 +46,7 @@ import com.vividsolutions.jts.geom.*;
  * Non-simple lines (i.e. which loop back to cross or touch
  * themselves) are supported.
  */
-public class LengthIndexedLine
+public class LengthIndexedLine implements Serializable
 {
   private Geometry linearGeom;
 
